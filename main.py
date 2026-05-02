@@ -2,6 +2,8 @@ import os
 import re
 import time
 import sys
+import webbrowser
+import random
 
 # hello, world!
 
@@ -12,16 +14,16 @@ def initialize() -> None:
     print("Welcome to calc(ify)!")
     print(""" 
                     ÷÷             ≠≠   ++    ++++        ≠≠   
-    ÷÷÷÷     ×××    ÷÷    ===     ≠≠         ++            ≠≠  
-  ÷÷    ÷÷       ×  ÷÷  ==    =  ≠≠   +++  ++++++ ++  ++   ≠≠  
-  ÷         ××××××  ÷÷ ==        ≠     ++    +    ++ ++    ≠≠  
-  ÷÷    ÷  ×     ×  ÷÷  =     =   ≠    ++   ++     + +     ≠   
-    ÷÷÷÷÷   ××××××  ÷÷   =====    ≠≠   +++  ++     ++    ≠≠    
-                                    ≠  ++  ++     ++    ≠ 
+     ÷÷÷     ×××    ÷÷    ===     ≠≠         ++            ≠≠  
+   ÷÷   ÷÷       ×  ÷÷  ==    =  ≠≠   +++  ++++++ ++  ++   ≠≠  
+  ÷÷        ××××××  ÷÷ ==        ≠     ++    +    ++ ++    ≠≠  
+  ÷÷       ×     ×  ÷÷ ==         ≠    ++   ++     + +     ≠   
+   ÷     ÷ ×     ×  ÷÷  =     =   ≠≠   +++  ++     ++    ≠≠    
+    ÷÷÷÷÷   ××××××  ÷÷   =====      ≠  ++  ++     ++    ≠ 
           """) #print logo
 
-    input("Please press any key to start: ")
-     
+    if (input("Please support us on Ko-Fi by typing \033[91m\"kofi\"!\033[00m \nIf not, press any key to start: ") == "kofi"):
+        webbrowser.open("https://www.ko-fi.com/calcify")
     return
 
 # if xp is greater than or equal to 20, it raises your level. Repeats if xp is still greater than 20
@@ -60,11 +62,15 @@ def print_available_operators(level):
     if (level > 2):
         print("[*]  Multiplication: A super-beefed up version of addition.\nAdds repeatedly.\nUnlocked at Level 2.\n")
     else:
-        print("\n[*]  LOCKED: Unlocked at Level 2\n")
+        print("[*]  LOCKED: Unlocked at Level 2\n")
     if (level > 3):
         print("[/]  Division: NASTY. I've never seen anything like this before! While Multiplication uses his powers for good, Division uses his powers for EVIL.\nUses evil powers to subtract repeatedly.\nUnlocked at Level 3")
     else:
-        print("\n[/]  LOCKED: Unlocked at Level 3.")
+        print("[/]  LOCKED: Unlocked at Level 3.\n")
+
+    print("[**]   LOCKED: Unlocked via purchase of the \"Powers n' Logs\" Expansion Pack for $4.99")
+    print("[sqrt]   LOCKED: Unlocked via purchase of the \"Powers n' Logs\" Expansion Pack for $4.99")
+    print("[log]   LOCKED: Coming soon! Support us via Ko-Fi for updates!")
     return
 
 
@@ -86,12 +92,15 @@ def print_menu(xp=0, level=0) -> (int, int):
 
 def take_input() -> (list, list):
     
-    valid_variables = ["+", "-", "*", "/",'.', ' ']
+    valid_variables = ["+", "-", "*", "/",'.', ' ', '(', ')']
     equation_components = [""]
     valid_equation = False
 
     while True:
         temp_equation = input("Enter your equation: ")
+        if temp_equation == "":
+            print("Please enter an equation.")
+            continue
         checked_values = len(temp_equation)
         for value in temp_equation:
             try:
@@ -127,16 +136,17 @@ def calculate(full_equation, operators, level) -> (float , int):
             validity = False
             break
         elif operator == '**':
-            print("This character is unlocked in DLC! Please purchase the DLC to use this operator.")
+            print("This operator is unlocked in DLC! Please purchase the \"Powers n' Logs\" Expansion Pack for $4.99.")
             validity = False
             break
     if validity == True:
         # creates a loading screen 
 
-        print("Calculating...")
+        print("Working on it, in the meanwhile check out a word from our sponsors!")
+        adverts()
         for i in range(2):
             for i in ["*", "**", "**-", "**--", "**--+", "**--++", "**--++÷", "**--++÷÷"]:
-                time.sleep(0.2)
+                time.sleep(5)
                 print(i)
                 # Move cursor up one line
                 sys.stdout.write('\x1b[1A')
@@ -152,7 +162,14 @@ def calculate(full_equation, operators, level) -> (float , int):
         
 
 def adverts() -> None:
-    
+    advertisements = [
+        "https://www.mangle.ca/get_random_url.php?t=1777763674", #random website
+        "https://www.youtube.com/watch?v=dQw4w9WgXcQ", #rickroll
+        "https://www.ko-fi.com/calcify", #kofi
+        "https://beaverhacks.org" # beaverhacks
+    ]
+
+    webbrowser.open(random.choice(advertisements)) 
     return
 
 
@@ -175,8 +192,11 @@ log(): future update
 """
 
 def main() -> None:
-    xp = 8 #sets xp to zero. Change this somehow if you don't want the xp to reset every time you initialize
-    level = 0 #same here
+    with open("playerdata.csv", "r") as file:
+        data = file.read()
+        xp = int(data[0]) 
+        level = int(data[1])
+
     initialize()
     new_xp, level = print_menu(xp, level)
     xp += new_xp
@@ -199,9 +219,6 @@ main()
 
 
 ADDITIONAL FEATURES: 
-DLC operands ( **, sqrt(), etc)
-Future updates (logarithms
-leveling/xp system (start with only addition and subtraction and user unlocks other operators through calculation (user retention))
 Customer support, random failures (AI hallucination)  *MAKE INTENTIONAL FOR RECORDING
 
 STRETCH FEATURES:
@@ -209,7 +226,6 @@ Ascii advertisements and kofi pop up in windows
 ascii ai art interpretation
 AI customer support
 JRPG boss fight
-Ko-fi implementation
 """
 
 
