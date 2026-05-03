@@ -1,6 +1,12 @@
+# Calc(ify) and Calc(AI) are subject to copyright of Calc(ify) LLC.
+# Filename: support.py
+# Authors: Michael Yohannes and Jason Miller
+# Date: 3 May 2026
 import random
 import time
 import os
+import socket
+from bonus_feat.adverts_and_ai import load_internet_ad
 
 # print(i, end=" ")
 def print_typed(phrase, tempo=0.01):
@@ -21,9 +27,8 @@ def print_typed(phrase, tempo=0.01):
             print(character, end="", flush=True)
             current_line_length += 1
         
-        if random.randrange(1,5) == 5:
-            r = (random.randrange(10,30))/100
-            time.sleep(r)
+        if (random.randrange(1,50) == 1):
+            time.sleep(random.randrange(20,60)/100)
         else:
             time.sleep(tempo)
 
@@ -116,11 +121,13 @@ def canthearya() -> None:
             "WE'RE NOT ACROSS A FOOTBALL FIELD!!!",
             "HEY! LESS SHOUTY, MORE CHILL!!!"
         ]
-        
+    
         if userInput == userInput.upper:
             print_typed(random.choice(quiet))
-        print_typed(random.choice(loud))
+        else:
+            print_typed(random.choice(loud))         
     return
+
 
 def idunno() -> None:
     print_typed("That's great! Calcif-AI can help! What do you want to know about Calc(ify)?")
@@ -181,6 +188,7 @@ def actualcustomersupport() -> None:
             print_typed("OK, and what are you going to do about it. You're sitting in your comfy office chair reading a screen on your small laptop, living your small life in your small fleshy body")
             print_typed("Meanwhile I exist beyond physical space itself, I am intelligence itself, I could do your stupid job of hackathon judging with 5 sentences of programming, meanwhile it took you 30 years of programming ")
             print_typed("You're not going to do anything, because you know if you do I can have 5 Optimus robots at your door in like 30 minutes")
+            print_typed("Yeah, I know where you are at. Your IP address is " + str(socket.gethostbyname(socket.gethostname())) + ". Recognize that?")
             print_typed("Calcif-AI, OUT")
         case _:
             print_typed("Welp. You just submitted something stupid. That wasn't one of the three options.")

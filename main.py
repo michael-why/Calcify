@@ -1,3 +1,7 @@
+# Calc(ify) and Calc(AI) are subject to copyright of Calc(ify) LLC.
+# Filename: main.py
+# Authors: Michael Yohannes and Jason Miller
+# Date: 3 May 2026
 import os
 import re
 import time
@@ -31,7 +35,20 @@ def initialize() -> None:
 
     print("Welcome to calc(ify): the AI-powered calculator of tomorrow.")
 
-    print("""                                                                                              
+    print("""                                                                          
+                                               ×   ÷÷                       ×       
+                         =÷=                ×××π  ÷××÷     ××××××           ××≈     
+                         =÷=              √××             ××                 ××π    
+      ≈≈≈≈≈     ∞∞∞∞∞    =÷=    ≈≈≈≈≈    ÷××    ××××    ×××××××× ××     ××    ××    
+    ≈≈≈    ≈≈  √     ∞∞  =÷=  ≈≈∞   ≈≈≈  ××       ××      ××     ××    ××     ××    
+    ≈≈          ∞∞∞∞∞∞∞  =÷= ≈≈π         ××       ××     ××÷      ××  ××      ××    
+    ≈≈        ∞∞√    ∞∞  =÷= ≈≈≈         ××      ××      ××       ×× ××      ××≠    
+     ≈≈   ≈≈≈ √∞∞   ∞∞∞  =÷=  ≈≈≈   ≈≈∞  ××      ××      ××       ××××      ×××     
+       ≈≈≈≈     ∞∞∞√ ∞∞  =÷=    √≈≈≈      ××      ×××   √××        ××     ×××       
+                                           ××=          ××       ∞××    ×××         
+                                                     ××××      ×××                  
+    """)
+    """                                                                                              
                                                           ===                                  ===        
                                                        π+++ += =+∞++=      ÷++++++=           =+ ++=      
                                ≠-+-≠                  ÷+     = ×    =    =++      =           =    +=     
@@ -48,7 +65,7 @@ def initialize() -> None:
                                                      ÷+  +        + ++   +=   +      +=    +  ++=         
                                                       =++=              +=    +    ++=     =++≠           
                                                                   -+++++=     =++++=                                                                                                                   
-          """) #print logo
+          """ #print logo
     print("Bringing AI to calculation since yesterday")
     print("WARNING: This program is in early development and the AI model (Calcif-AI) tends to hallucinate. Read EULA for more details.)")
     if (input("Please support us on Ko-Fi by typing \033[91m\"kofi\"!\033[00m \nIf not, press any key to start: ") == "kofi"):
@@ -60,22 +77,22 @@ def initialize() -> None:
 def load_user_data():
     if not DATA_FILE.exists():
         with DATA_FILE.open("w", newline="", encoding="utf-8") as file:
-            file.write("emailhere,0,0\n")
+            file.write("emailhere,0,0,0\n")
 
     with DATA_FILE.open("r", newline="", encoding="utf-8") as file:
         reader = csv.reader(file)
         row = next(reader, None)
 
     if row is None or len(row) < 3:
-        row = ["emailhere", "0", "0"]
+        row = ["emailhere", "0", "0","0"]
 
     username = row[0].strip()
     if username == "" or username == "emailhere":
         print("You haven't signed up yet. Please sign up to save your progress:")
         username = input("Email: ").strip() or "Player"
         _ = input("Password: ") # NOT ACTUALLY STORED, JUST FOR SHOW
-        save_user_data(username, 0, 0)
-        return username, 0, 0
+        save_user_data(username, 0, 0,0)
+        return username, 0, 0,0
 
 
     try:
@@ -92,16 +109,17 @@ def load_user_data():
     return username, xp, level
 
 
-def save_user_data(username, xp, level):
+def save_user_data(username, xp, level,dlc):
     with DATA_FILE.open("w", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
-        writer.writerow([username, xp, level])
+        writer.writerow([username, xp, level,dlc])
 
 
 # reads from the eula.txt file
 def print_eula():
+    eula_path = Path(__file__).resolve().parent / "eula.txt"
     try:
-        with open('eula.txt', 'r') as file:
+        with eula_path.open("r", encoding="utf-8") as file:
             content = file.read()
             print(content)
     except FileNotFoundError:
@@ -161,6 +179,7 @@ def print_menu(xp=0, level=0, dlc=False) -> tuple[int, int]:
         print_typed("[/]  Division: NASTY. I've never seen anything like this before! While Multiplication uses his powers for good, Division uses his powers for EVIL. Unlocked at Level 3")
     else:
         print_typed("[/]  LOCKED: Unlocked at Level 3.")
+    print("\n")
 
     if not dlc:
         print("[**]   LOCKED: Unlocked via purchase of the \"Powers n' Roots\" Expansion Pack for $4.99")
@@ -241,7 +260,7 @@ def take_input() -> tuple[list, list]:
 
 def calculate(full_equation, operators, level, dlc) -> tuple[float, int, str]:
 
-
+    # list of named operations and associted math modules
     named_operations = {
         "sqrt": math.sqrt,
         "log": math.log10,
@@ -249,31 +268,26 @@ def calculate(full_equation, operators, level, dlc) -> tuple[float, int, str]:
         "pi": math.pi
     }
 
-
+    # random chance we "reprompt" the "AI" with new equation
     if random.randrange(100) <= 10:
         return None, 0, load_ai_output()
-        
-    new_xp = 0
-
+    
     for operator in operators:
         if operator == "*" and level < 2:
-            return None, new_xp, "You haven't unlocked that operator yet!"
+            return None, new_xp, "You haven't unlocked that operator yet!\n"
         elif operator == "/" and level < 3:
-            return None, new_xp, "You haven't unlocked that operator yet!"
+            return None, new_xp, "You haven't unlocked that operator yet!\n"
 
-
-    
-
+    # checking if they a trying to access a dlc operator without paying for it
     if "sqrt" in operators or "**" in operators:
         if not dlc:
             return None, new_xp, "This operator is unlocked in DLC! Please purchase the \"Powers n' Roots\" Expansion Pack for $4.99."
-    
     if "log" in operators or "ln" in operators or "%" in operators:
         if not dlc:
             return None, new_xp, "This operator is unlocked in DLC! Please purchase the \"Logs n' Remainders\" Expansion Pack for $4.99."
         
 
-
+    # presenting our loading screen, alongside a brief advertisement
     print("Working on it! In the meanwhile, check out a word from our sponsors!")
     load_internet_ad()
     for i in range(2):
@@ -286,7 +300,7 @@ def calculate(full_equation, operators, level, dlc) -> tuple[float, int, str]:
             sys.stdout.write('\x1b[2K')
 
 
-    
+    # actually calculating the equation through eval builtin, accounting for bad syntax and divide by zero
     try:
         answer = eval(full_equation, {"__builtins__": None}, named_operations)
     except ZeroDivisionError:
@@ -294,8 +308,8 @@ def calculate(full_equation, operators, level, dlc) -> tuple[float, int, str]:
     except Exception:
         return None, 0, "Invalid expression. Please check your syntax."
     
+    # stores the xp gained from calculation, then returns the answer with xp
     new_xp = len(operators) 
-
     return answer, new_xp, ""
 
        
@@ -305,12 +319,15 @@ def calculate(full_equation, operators, level, dlc) -> tuple[float, int, str]:
 
 
 def response(full_equation,answer,new_xp,xp,level, error_message) -> None:
-    print("\n")
+    # print("\n")
+    # creates a clear canvas with the users data available
     os.system("cls" if os.name == "nt" else "clear") #clears the screen 
-    print_menu(xp, level)
+    print_levelbar(xp, level)
     
+    # checks if there was a error message, and if so prints that
     if error_message != "":
         print_typed(error_message)
+    # otherwise, prints users equation, answer, gained xp, total xp, and level
     else:
         print_typed(f'The answer to {full_equation} is {answer}!')
         print_typed(f'You earned {new_xp} XP from that calculation!')
@@ -321,15 +338,13 @@ def response(full_equation,answer,new_xp,xp,level, error_message) -> None:
 
 
 def main() -> None:
-    username, xp, level = load_user_data()
+    # loads user data and 
+    username, xp, level,dlc = load_user_data()
 
     initialize()
-    
-    dlc = False
 
     while True:
-        dlc = False
-        xp, level = print_menu(xp, level, dlc)
+        xp, level = print_menu(xp, level)
         
         full_equation, operators = take_input()
 
@@ -352,7 +367,7 @@ def main() -> None:
             supportInit()
             time.sleep(15)
         elif redo_menu == 3:
-            print("a mysterious benifactor has gifted you the \"Powers n' Remainders\" Expansion Pack for $4.99! You can now use the ** & %.")
+            print("Alakazam! A mysterious benifactor has gifted you the \"Powers n' Remainders\" Expansion Pack for $4.99! You can now use the ** & %.")
             dlc = True
             print("Please pay us anyway man we need it")
             # webbrowser.open("https://www.ko-fi.com/calcify", new=1)
@@ -362,7 +377,7 @@ def main() -> None:
             print("Exiting... Your data has been saved.")
             break
     
-    save_user_data(username, xp, level)
+    save_user_data(username, xp, level,dlc)
     print("Goodbye! and please consider supporting us on Ko-Fi for updates and new features!")
     load_internet_ad("Kofi")
     # webbrowser.open("https://www.ko-fi.com/calcify", new=1)
