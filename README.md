@@ -19,8 +19,6 @@ Here are the main features of Calc(ify):
 
 ## ℹ️ Overview
 
-> *If nothing else, try writing better READMEs because it will make you look more professional and legitimate.*
-
  We implemented a proprietary neural network, something we call Calcif-AI to complete mathematics equations like no one has ever done before. Before, we had human computers, now, with Calcify, we have computer computers. 
  The program will comprehend a user inputted equation, use a advanced propietary AI model to calculate the answer (running locally), then provides them a answer. All of this is coexisting with a complex leveling and progression system that keeps users engaged longterm
 
@@ -31,4 +29,7 @@ We, [Michael Yohannes](https://github.com/michael-why) and [Jason Jeremy Miller(
 ## 🚀 Usage instructions
 
 To run this program, please just download this entire repository and run the file 
-**'main.py'**
+**'main.py'**:
+
+## Final Note> 
+*note that no actual AI is used in this program*
