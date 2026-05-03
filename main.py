@@ -48,26 +48,8 @@ def initialize() -> None:
                                            ××=          ××       ∞××    ×××         
                                                      ××××      ×××                  
     """)
-    """                                                                                              
-                                                          ===                                  ===        
-                                                       π+++ += =+∞++=      ÷++++++=           =+ ++=      
-                               ≠-+-≠                  ÷+     = ×    =    =++      =           =    +=     
-                               -   -                =++   +++= ×+  +=   ∞+   +++++=           =++   +∞    
-       √=----÷≈    π∞≈≈≈≈≈∞π   +   +   ∞÷+++++÷∞   =+   ++==+++++++= =+++   ++++==++÷    =+++=  =+   +    
-     √=-      π÷√ π≈       =∞π +   + ∞÷+       +=  +   +×  =      +  =          =+  +÷  ≈+   =   +   +    
-    √-   ----   √ π  =≈≈≠≈   ∞ +   +∞+    +++     =+  ×-   =+++   +  =+++   ++++=+   +  +   +=   +   +    
-    =   -∞  √=-=√ ∞=÷=≈≈≠=×  ≈ +   +÷   +÷∞ ∞÷+-= +   +      =+  +=    =+  +=    -+  +√+   +=    +   +    
-    -  +=        π≈          ≈ +   ++   +         +   +      +   +     +   +      +   ++  +=    =+   +    
-    =   -√  √=-=√∞   ÷≈≈≠=×  ≈ +   +÷   +∞   ≈×+÷∞+   +=     +   +     +   +      +   +  +=    =+   +=    
-    √-   ----   √∞   ÷≈≈≠    ≈ +   +∞+   ++++≈   ∞=+   +π    +   +++= =+  +=      =+    +=   =++   +=     
-     √÷        -√π≈       =  ∞ -   - ∞÷+       +÷∞ +   ≠+=   =+     = +   +       =+   +=  =++    +=      
-       ≠÷-----=√   ∞≈≈≈≈≈∞∞∞∞π ≠-+-≠   ∞÷+++++÷∞   √++   +    =++++++÷+   +   =++++   +=   +    ++=       
-                                                     ÷+  +        + ++   +=   +      +=    +  ++=         
-                                                      =++=              +=    +    ++=     =++≠           
-                                                                  -+++++=     =++++=                                                                                                                   
-          """ #print logo
-    print("Bringing AI to calculation since yesterday")
-    print("WARNING: This program is in early development and the AI model (Calcif-AI) tends to hallucinate. Read EULA for more details.)")
+    print("Bringing AI to calculation, since yesterday.")
+    print("(WARNING: This program is in early development and the AI model (Calcif-AI) tends to hallucinate. Read EULA for more details.)")
     if (input("Please support us on Ko-Fi by typing \033[91m\"kofi\"!\033[00m \nIf not, press any key to start: ") == "kofi"):
         # webbrowser.open("https://www.ko-fi.com/calcify", new=1)
         load_internet_ad("Kofi")
@@ -102,17 +84,22 @@ def load_user_data():
     try:
         level = int(row[2])
     except (ValueError, IndexError):
-        level = 0
+        level = 1
+
+    try:
+        dlc = bool(row[3])
+    except (ValueError, IndexError):
+        dlc = False
 
     print(f"Welcome back, {username}")
 
-    return username, xp, level
+    return username, xp, level, dlc
 
 
-def save_user_data(username, xp, level,dlc):
+def save_user_data(username, xp, level, dlc):
     with DATA_FILE.open("w", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
-        writer.writerow([username, xp, level,dlc])
+        writer.writerow([username, xp, level, dlc])
 
 
 # reads from the eula.txt file
@@ -140,6 +127,11 @@ def print_levelbar(xp, level) -> None:
     ~-█████░░░░░░░░░░░░░░░-~ XP: 5/20
 
     """
+    #check for a level up
+    if (xp >= 20):
+        xp, level = level_up(xp, level)
+        print("Level UP!!\nYou are now at level ", level, "!")
+
     # Creates the xp bar by running a loop and adding those box characters to the xpbar variable.
     # It then prints it with the extra text
     xpbar = ""
@@ -153,21 +145,17 @@ def print_levelbar(xp, level) -> None:
       i += 1
     print("Level: ", level)
     print("~-", xpbar, "-~ XP: ", xp, "/ 20\n")
-    return
+    return xp, level
 
 
 def print_menu(xp=0, level=0, dlc=False) -> tuple[int, int]:
     os.system("cls" if os.name == "nt" else "clear") #clears the screen every time the menu is drawn
     
-    #check for a level up
-    if (xp >= 20):
-        xp, level = level_up(xp, level)
-        print("Level UP!!\nYou are now at level ", level, "!")
     
     #prints the level bar
-    print_levelbar(xp, level)
+    xp, level = print_levelbar(xp, level)
 
-    print("Your available operators:\n")
+    print("Your available operators:")
     print_typed("[+]  Addition: The trusty, rusty, dusty, original operator.")
     print_typed("[-]  Subtraction: Addition's WAAACCCKY cousin!!")
 
@@ -181,7 +169,7 @@ def print_menu(xp=0, level=0, dlc=False) -> tuple[int, int]:
         print_typed("[/]  LOCKED: Unlocked at Level 3.")
     print("\n")
 
-    if not dlc:
+    if dlc == False:
         print("[**]   LOCKED: Unlocked via purchase of the \"Powers n' Roots\" Expansion Pack for $4.99")
         print("[sqrt]   LOCKED: Unlocked via purchase of the \"Powers n' Roots\" Expansion Pack for $4.99")
         print("[log]   LOCKED: Unlocked via purchase of the \"Logs n' Remainder\" Expansion Pack for $4.99")
@@ -274,23 +262,23 @@ def calculate(full_equation, operators, level, dlc) -> tuple[float, int, str]:
     
     for operator in operators:
         if operator == "*" and level < 2:
-            return None, new_xp, "You haven't unlocked that operator yet!\n"
+            return None, 0, "You haven't unlocked that operator yet!\n"
         elif operator == "/" and level < 3:
-            return None, new_xp, "You haven't unlocked that operator yet!\n"
+            return None, 0, "You haven't unlocked that operator yet!\n"
 
     # checking if they a trying to access a dlc operator without paying for it
     if "sqrt" in operators or "**" in operators:
         if not dlc:
-            return None, new_xp, "This operator is unlocked in DLC! Please purchase the \"Powers n' Roots\" Expansion Pack for $4.99."
+            return None, 0, "This operator is unlocked in DLC! Please purchase the \"Powers n' Roots\" Expansion Pack for $4.99."
     if "log" in operators or "ln" in operators or "%" in operators:
         if not dlc:
-            return None, new_xp, "This operator is unlocked in DLC! Please purchase the \"Logs n' Remainders\" Expansion Pack for $4.99."
+            return None, 0, "This operator is unlocked in DLC! Please purchase the \"Logs n' Remainders\" Expansion Pack for $4.99."
         
 
     # presenting our loading screen, alongside a brief advertisement
     print("Working on it! In the meanwhile, check out a word from our sponsors!")
     load_internet_ad()
-    for i in range(2):
+    for i in range(3):
         for i in ["*", "**", "**-", "**--", "**--+", "**--++", "**--++÷", "**--++÷÷"]:
             time.sleep(0.5)
             print(i)
@@ -333,18 +321,19 @@ def response(full_equation,answer,new_xp,xp,level, error_message) -> None:
         print_typed(f'You earned {new_xp} XP from that calculation!')
         if xp >= 20:
             print_typed(f'Congratulations! You leveled up to level {level + 1}!')
-        print_typed(f'You now have {xp} XP! Only {20-xp} XP until the next level!')
+            xp, level = level_up(xp, level)
+        print_typed(f'You now have {xp} XP! Only {20-xp} XP until the next level! ')
     return
 
 
 def main() -> None:
     # loads user data and 
-    username, xp, level,dlc = load_user_data()
+    username, xp, level, dlc = load_user_data()
 
     initialize()
-
+    
     while True:
-        xp, level = print_menu(xp, level)
+        xp, level = print_menu(xp, level, dlc)
         
         full_equation, operators = take_input()
 
@@ -367,7 +356,7 @@ def main() -> None:
             supportInit()
             time.sleep(15)
         elif redo_menu == 3:
-            print("Alakazam! A mysterious benifactor has gifted you the \"Powers n' Remainders\" Expansion Pack for $4.99! You can now use the ** & %.")
+            print("Alakazam! A mysterious benifactor has gifted you the \"Powers n' Remainders\" Expansion Pack for $4.99! You can now use the \" Powers n' Roots\" and \" Logs n' Remaibders \" DLC")
             dlc = True
             print("Please pay us anyway man we need it")
             # webbrowser.open("https://www.ko-fi.com/calcify", new=1)
@@ -377,7 +366,7 @@ def main() -> None:
             print("Exiting... Your data has been saved.")
             break
     
-    save_user_data(username, xp, level,dlc)
+    save_user_data(username, xp, level, dlc)
     print("Goodbye! and please consider supporting us on Ko-Fi for updates and new features!")
     load_internet_ad("Kofi")
     # webbrowser.open("https://www.ko-fi.com/calcify", new=1)
