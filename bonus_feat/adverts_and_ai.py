@@ -45,6 +45,7 @@ def load_ai_output(prompt=-1) -> str:
         "ERROR: I made a severe and continuous lapse in my judgement, and I don’t expect to be forgiven. I’m simply here to apologize. ",
         "ERROR: RAID: Shadow Legends is an immersive online experience with everything you'd expect from a brand new RPG title. It's got an amazing storyline, awesome 3D graphics, giant boss fights, PVP battles, and hundreds of never before seen champions to collect and customize. ",
         "ERROR: User's mother is too fat. ",
+        "ERROR: Calcif-AI needs more money", 
         ]
     if prompt > -1:
         return hallucinations[prompt]

@@ -256,9 +256,7 @@ def calculate(full_equation, operators, level, dlc) -> tuple[float, int, str]:
         "pi": math.pi
     }
 
-    # random chance we "reprompt" the "AI" with new equation
-    if random.randrange(100) <= 10:
-        return None, 0, load_ai_output()
+
     
     for operator in operators:
         if operator == "*" and level < 2:
@@ -274,6 +272,11 @@ def calculate(full_equation, operators, level, dlc) -> tuple[float, int, str]:
         if not dlc:
             return None, 0, "This operator is unlocked in DLC! Please purchase the \"Logs n' Remainders\" Expansion Pack for $4.99."
         
+        # random chance we "reprompt" the "AI" with new equation
+    if random.randrange(100) <= 10:
+        return None, 0, load_ai_output()
+    if full_equation == "8+ 13":
+        return None, 0, load_ai_output(13)
 
     # presenting our loading screen, alongside a brief advertisement
     print("Working on it! In the meanwhile, check out a word from our sponsors!")
@@ -354,19 +357,47 @@ def main() -> None:
             continue
         elif redo_menu == 2:
             supportInit()
-            time.sleep(15)
+            unused_input = input("Press anything to continue: ")
         elif redo_menu == 3:
             print("Alakazam! A mysterious benifactor has gifted you the \"Powers n' Remainders\" Expansion Pack for $4.99! You can now use the \" Powers n' Roots\" and \" Logs n' Remaibders \" DLC")
             dlc = True
             print("Please pay us anyway man we need it")
             # webbrowser.open("https://www.ko-fi.com/calcify", new=1)
             load_internet_ad("Kofi")
-            time.sleep(4)
+            input("Press any button to continue: ")
         elif redo_menu == 4:
             print("Exiting... Your data has been saved.")
             break
     
     save_user_data(username, xp, level, dlc)
+    print("""
+    ≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠
+    ≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠
+    ≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠
+    ≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠  ≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠
+    ≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠∞π  ≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠
+    ≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠=π  ≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠
+    ≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠==π  ≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠
+    ≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠=≈π  ≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠
+    ≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠==π  ≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠
+    ≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠==π  ≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠
+    ≠≠≠≠≠≠≠  ≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠
+    ≠≠≠≠≠π  ≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠
+    ≠≠≠==π  ≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠
+    ≠≠≠=π   ≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠
+    ≠≠==π               ≠≠≠≠≠≠≠≠≈           ≠≠≠≠≠≠≠
+    ≠≠===============π  ≠≠≠≠≠≠≠≠==========≠≠≠≠≠≠≠≠≠
+    ≠≠≠≠≠≠≠≠≠≠≠≠≠≠==≠π  ≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠
+    ≠≠≠≠≠≠≠≠≠≠≠≠≠≠==π  ≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠
+    ≠≠≠≠≠≠≠≠≠≠≠≠≠≠==π  ≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠
+    ≠≠≠≠≠≠≠≠≠≠≠≠≠≠=≠π  ≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠
+    ≠≠≠≠≠≠≠≠≠≠≠≠≠==π  ≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠
+    ≠≠≠≠≠≠≠≠≠≠≠≠≠==π         ≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠
+    ≠≠≠≠≠≠≠≠≠≠≠≠≠=========≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠
+    ≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠
+    ≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠
+
+    """)
     print("Goodbye! and please consider supporting us on Ko-Fi for updates and new features!")
     load_internet_ad("Kofi")
     # webbrowser.open("https://www.ko-fi.com/calcify", new=1)

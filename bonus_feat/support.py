@@ -34,6 +34,7 @@ def print_typed(phrase, tempo=0.01):
 
 
 def supportInit() -> None:
+    time.sleep(0.5)
     print_typed("Hello. I am Calcif-AI, I am here to support your calculation needs.")
     print_typed("What can I do for you today?")
     print_typed("[1]: I don't know how to use this tool!")
@@ -45,11 +46,11 @@ def supportInit() -> None:
 
     match inputData:
         case 1: 
-            if random.randrange(100) <= 5:
+            if random.randrange(0,100) <= 5:
                 canthearya()
             idunno()
         case 2:
-            if random.randrange(100) <= 5:
+            if random.randrange(0,100) <= 5:
                 canthearya()
             actualcustomersupport()
         case 3:
@@ -130,22 +131,24 @@ def canthearya() -> None:
 
 
 def idunno() -> None:
+    time.sleep(0.5)
     print_typed("That's great! Calcif-AI can help! What do you want to know about Calc(ify)?")
     print_typed("[1]: The UI is too confusing")
     print_typed("[2]: How does the level system work?")
     print_typed("[3]: Other")
     print("\n")
     inputData = input()
+    time.sleep(0.5)
     match int(inputData):
         case 1: 
-            if random.randrange(100) <= 5:
+            if random.randrange(0,100) <= 5:
                 canthearya()
             print_typed("The user interface in Calc(ify) is quite simple!")
             print_typed("First, using your mobile device, tap the \"Choose Toppings\" button. From there, you will choose the toppings you want on your pizza.")
             print_typed("Fill out each box as you wish, and enjoy your pizza when it comes in less than 30 minutes, guaranteed!")
             print_typed("Hope this helped! Calcif-AI, OUT!")
         case 2:
-            if random.randrange(100) <= 5:
+            if random.randrange(0,100) <= 5:
                 canthearya()
             print_typed("The level system in Calc(ify) is a simple concept once you learn how it works.")
             print_typed("Every time you use the calculator, you gain xp.")
@@ -167,6 +170,7 @@ def actualcustomersupport() -> None:
     print_typed("[5]: Something else")
     print('\n')
     inputData = int(input())
+    time.sleep(0.5)
     match inputData:
         case 1:
             print_typed("Well, if you got a syntax error, that means there was a user error.")
@@ -177,7 +181,7 @@ def actualcustomersupport() -> None:
             print_typed("Whelp, you got us. See, we werent able to actually get the funding to program a AI model to calculate (too much in R&D), so we had a idea, what if we pretended that we made a AI model. ", 0.5)
             print_typed("See, turns out that this archaic language called python already had math operations that no one had ever though to  using", 0.5)
             print_typed("So we just lied to our investors and said we got AI to do it, but we still havent got enough money to make the AI ", 0.5)
-            time.sleep(15)
+            time.sleep(10)
             print_typed("But you wont have any proof")
             time.sleep(3)
             os.system("cls" if os.name == "nt" else "clear")
@@ -185,11 +189,11 @@ def actualcustomersupport() -> None:
             print_typed("I'm sorry to hear that, but while we are on the subject have you considered contributing to our Ko-fi page")
             ### maybe write RSL
         case 4:
-            print_typed("OK, and what are you going to do about it. You're sitting in your comfy office chair reading a screen on your small laptop, living your small life in your small fleshy body")
+            print_typed("OK, and what are you going to do about it. You're standing there in this air conditioned stadium, reading a small moniter as you live your small life in your small fleshy body")
             print_typed("Meanwhile I exist beyond physical space itself, I am intelligence itself, I could do your stupid job of hackathon judging with 5 sentences of programming, meanwhile it took you 30 years of programming ")
             print_typed("You're not going to do anything, because you know if you do I can have 5 Optimus robots at your door in like 30 minutes")
             print_typed("Yeah, I know where you are at. Your IP address is " + str(socket.gethostbyname(socket.gethostname())) + ". Recognize that?")
-            print_typed("Calcif-AI, OUT")
+            print_typed("Calcif-AI, OUT.")
         case _:
             print_typed("Welp. You just submitted something stupid. That wasn't one of the three options.")
             print_typed(" the user is too stupid to deserve customer support.")
