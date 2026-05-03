@@ -30,6 +30,12 @@ laws, regulations, and general expectations of conduct. The User further
 acknowledges that compliance with such expectations is their responsibility,
 even if those expectations are unclear, unspecified, or subject to change.
 
+5. AI DISCLAIMERS
+Any and all references to the use of AI is not true; AI was not used
+in the slightest. Calcify is not subject to any
+legal complications regarding AI hallucinations or any false information
+produced by AI.
+
 7. PRIVACY
 Your privacy is important, though the extent to which it is important may
 vary depending on context. By using the Software, you acknowledge that
@@ -86,9 +92,13 @@ Additional listings may occur, though they are not guaranteed.
 Nothing in this section adds or subtracts meaning in a measurable way.
 
 17. DATA COLLECTION
-The Software may (and will) collect any and all data related to the user
-(including user emails and passwords which are stored in an unencrypted csv file),
-which will be shipped straight to Google Gemini immediately
+The Software may (and will) collect any and all data related to the user,
+including, but not limited to:
+1. Usernames and passwords
+2. Web browser cookies
+3. App usage data
+, all of which are stored in an unencrypted csv file.
+All will be shipped straight to Google Gemini immediately
 for advertisement and data collection services.
 
 18. ACKNOWLEDGEMENT
