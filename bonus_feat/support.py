@@ -62,6 +62,8 @@ def supportInit() -> None:
 def canthearya() -> None:
     
     userInput = ""
+
+    repitition = 0
     while userInput != "exit":
         print("\n")
         userInput = input("Please specify by using the input below.\n")
@@ -122,11 +124,15 @@ def canthearya() -> None:
             "WE'RE NOT ACROSS A FOOTBALL FIELD!!!",
             "HEY! LESS SHOUTY, MORE CHILL!!!"
         ]
-    
-        if userInput == userInput.upper:
+
+        if repitition >= 5:
+            print_typed("I'm sick of your volume issues, just type exit to leave me alone")
+        elif userInput == userInput.upper:
             print_typed(random.choice(quiet))
         else:
-            print_typed(random.choice(loud))         
+            print_typed(random.choice(loud))    
+        
+        repitition += 1  
     return
 
 

@@ -1,9 +1,5 @@
 # Calc(ify)
 
-[![Spelling](https://github.com/banesullivan/README/actions/workflows/spelling.yml/badge.svg)](https://github.com/banesullivan/README/actions/workflows/spelling.yml)
-
-> *Your documentation is a direct reflection of your software, so hold it to the same standards.*
-
 Have you ever been stuck in the sticky position of needing to solve math equations, but found yourself getting stuck? Have you ever wished the process of math could be simply automated using today’s machinery? Well wish no longer!
 
 Welcome to Calc(ify). It is the solution to computations, the AI-fueled powerhouse built to last.
