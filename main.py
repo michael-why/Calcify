@@ -5,7 +5,12 @@ import sys
 import webbrowser
 import random
 import csv
+import math
+
 from bonus_feat.support import supportInit
+from bonus_feat.support import print_typed
+from bonus_feat.adverts_and_ai import load_internet_ad
+from bonus_feat.adverts_and_ai import load_ai_output
 
 from pathlib import Path
 
@@ -26,19 +31,29 @@ def initialize() -> None:
 
     print("Welcome to calc(ify): the AI-powered calculator of tomorrow.")
 
-    print(""" 
-                    ÷÷             ≠≠   ++    ++++        ≠≠   
-     ÷÷÷     ×××    ÷÷    ===     ≠≠         ++            ≠≠  
-   ÷÷   ÷÷       ×  ÷÷  ==    =  ≠≠   +++  ++++++ ++  ++   ≠≠  
-  ÷÷        ××××××  ÷÷ ==        ≠     ++    +    ++ ++    ≠≠  
-  ÷÷       ×     ×  ÷÷ ==         ≠    ++   ++     + +     ≠   
-   ÷     ÷ ×     ×  ÷÷  =     =   ≠≠   +++  ++     ++    ≠≠    
-    ÷÷÷÷÷   ××××××  ÷÷   =====      ≠  ++  ++     ++    ≠ 
+    print("""                                                                                              
+                                                          ===                                  ===        
+                                                       π+++ += =+∞++=      ÷++++++=           =+ ++=      
+                               ≠-+-≠                  ÷+     = ×    =    =++      =           =    +=     
+                               -   -                =++   +++= ×+  +=   ∞+   +++++=           =++   +∞    
+       √=----÷≈    π∞≈≈≈≈≈∞π   +   +   ∞÷+++++÷∞   =+   ++==+++++++= =+++   ++++==++÷    =+++=  =+   +    
+     √=-      π÷√ π≈       =∞π +   + ∞÷+       +=  +   +×  =      +  =          =+  +÷  ≈+   =   +   +    
+    √-   ----   √ π  =≈≈≠≈   ∞ +   +∞+    +++     =+  ×-   =+++   +  =+++   ++++=+   +  +   +=   +   +    
+    =   -∞  √=-=√ ∞=÷=≈≈≠=×  ≈ +   +÷   +÷∞ ∞÷+-= +   +      =+  +=    =+  +=    -+  +√+   +=    +   +    
+    -  +=        π≈          ≈ +   ++   +         +   +      +   +     +   +      +   ++  +=    =+   +    
+    =   -√  √=-=√∞   ÷≈≈≠=×  ≈ +   +÷   +∞   ≈×+÷∞+   +=     +   +     +   +      +   +  +=    =+   +=    
+    √-   ----   √∞   ÷≈≈≠    ≈ +   +∞+   ++++≈   ∞=+   +π    +   +++= =+  +=      =+    +=   =++   +=     
+     √÷        -√π≈       =  ∞ -   - ∞÷+       +÷∞ +   ≠+=   =+     = +   +       =+   +=  =++    +=      
+       ≠÷-----=√   ∞≈≈≈≈≈∞∞∞∞π ≠-+-≠   ∞÷+++++÷∞   √++   +    =++++++÷+   +   =++++   +=   +    ++=       
+                                                     ÷+  +        + ++   +=   +      +=    +  ++=         
+                                                      =++=              +=    +    ++=     =++≠           
+                                                                  -+++++=     =++++=                                                                                                                   
           """) #print logo
     print("Bringing AI to calculation since yesterday")
     print("WARNING: This program is in early development and the AI model (Calcif-AI) tends to hallucinate. Read EULA for more details.)")
     if (input("Please support us on Ko-Fi by typing \033[91m\"kofi\"!\033[00m \nIf not, press any key to start: ") == "kofi"):
-        webbrowser.open("https://www.ko-fi.com/calcify", new=1)
+        # webbrowser.open("https://www.ko-fi.com/calcify", new=1)
+        load_internet_ad("Kofi")
     return
 
 
@@ -123,7 +138,7 @@ def print_levelbar(xp, level) -> None:
     return
 
 
-def print_menu(xp=0, level=0) -> tuple[int, int]:
+def print_menu(xp=0, level=0, dlc=False) -> tuple[int, int]:
     os.system("cls" if os.name == "nt" else "clear") #clears the screen every time the menu is drawn
     
     #check for a level up
@@ -135,25 +150,62 @@ def print_menu(xp=0, level=0) -> tuple[int, int]:
     print_levelbar(xp, level)
 
     print("Your available operators:\n")
-    print("[+]  Addition: The trusty, rusty, dusty, original operator.")
-    print("[-]  Subtraction: Addition's WAAACCCKY cousin!!")
+    print_typed("[+]  Addition: The trusty, rusty, dusty, original operator.")
+    print_typed("[-]  Subtraction: Addition's WAAACCCKY cousin!!")
 
     if (level > 2):
-        print("[*]  Multiplication: A super-beefed up version of addition.Unlocked at Level 2.")
+        print_typed("[*]  Multiplication: A super-beefed up version of addition.Unlocked at Level 2.")
     else:
-        print("[*]  LOCKED: Unlocked at Level 2")
+        print_typed("[*]  LOCKED: Unlocked at Level 2")
     if (level > 3):
-        print("[/]  Division: NASTY. I've never seen anything like this before! While Multiplication uses his powers for good, Division uses his powers for EVIL. Unlocked at Level 3")
+        print_typed("[/]  Division: NASTY. I've never seen anything like this before! While Multiplication uses his powers for good, Division uses his powers for EVIL. Unlocked at Level 3")
     else:
-        print("[/]  LOCKED: Unlocked at Level 3.")
+        print_typed("[/]  LOCKED: Unlocked at Level 3.")
 
-    print("[**]   LOCKED: Unlocked via purchase of the \"Powers n' Remainders\" Expansion Pack for $4.99")
-    print("[sqrt]   LOCKED: Unlocked via purchase of the \"Powers n' Remainders\" Expansion Pack for $4.99")
-    print("[log]   LOCKED: Coming soon! Support us via Ko-Fi for updates!")
+    if not dlc:
+        print("[**]   LOCKED: Unlocked via purchase of the \"Powers n' Roots\" Expansion Pack for $4.99")
+        print("[sqrt]   LOCKED: Unlocked via purchase of the \"Powers n' Roots\" Expansion Pack for $4.99")
+        print("[log]   LOCKED: Unlocked via purchase of the \"Logs n' Remainder\" Expansion Pack for $4.99")
+        print("[%]   LOCKED: Unlocked via purchase of the \"Logs n' Remainder\" Expansion Pack for $4.99")
+        print("\n")
+    else:
+        print_typed("[**]   Exponetiation: Imagine multiplication, but EXTREME")
+        print_typed("[sqrt]   Square Root: A literal supervillian, cutting everything it sees in half ")
+        print_typed("[log]   Logarithm: The reverse of exponentiation — finds the power that made the number.")
+        print_typed("[%]   Modulo(Remainder): What’s left over after division, like the last cookie slice.")
+        print("\n")
     
     return xp, level
 
+def take_input() -> tuple[str, list[str]]:
+    valid_names = {"sqrt", "log", "ln", "pi"}
+    allowed_chars = re.compile(r'^[0-9A-Za-z+\-*/%.() \t]+$')
+    name_tokens = re.compile(r'[A-Za-z_]\w*')
 
+    while True:
+        full_equation = input("Enter your equation: ").strip()
+        if full_equation == "":
+            print("Please enter an equation.")
+            continue
+
+        if not allowed_chars.match(full_equation):
+            invalid_chars = sorted(set(re.findall(r'[^0-9A-Za-z+\-*/%.() \t]', full_equation)))
+            print("Invalid character(s):", " ".join(invalid_chars))
+            continue
+
+        invalid_names = [
+            name
+            for name in name_tokens.findall(full_equation)
+            if name not in valid_names
+        ]
+        if invalid_names:
+            print("Invalid function or name:", ", ".join(dict.fromkeys(invalid_names)))
+            continue
+        
+        operators = re.findall(r'\*\*|%|\b(?:sqrt|log|ln)\b|[+\-*/]', full_equation)
+        return full_equation, operators
+
+"""
 def take_input() -> tuple[list, list]:
     valid_variables = ["+", "-", "*", "/",'.', ' ', '(', ')', '**', '%']
     equation_components = [""]
@@ -185,26 +237,21 @@ def take_input() -> tuple[list, list]:
             
     return full_equation, operators
 
+"""    
+
 def calculate(full_equation, operators, level, dlc) -> tuple[float, int, str]:
 
+
+    named_operations = {
+        "sqrt": math.sqrt,
+        "log": math.log10,
+        "ln": math.log,
+        "pi": math.pi
+    }
+
+
     if random.randrange(100) <= 10:
-        hallucinations = [
-        "Here is the expansion of π arranged in groups of 50 digits as Aitken recited it. 3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337867831652712019091456485669234603486104543266482133936072602491412737245870066063155881748815209209628292540917153643678925903600113305305488204665213841469519415116094330572703657595919530921861173819326117931051185480744623799627495673518857527248912279381830119491298336733624406566430860213949463952247371907021798",
-        "I'm sorry, but as an AI model, I cannot fulfill that request.\nWould you instead like me to help plan a birthday party?", 
-        "fish",
-        "calcify on ko-fi",
-        "ERROR: Syntax invalid!",
-        "What the **** did you just ****ing say about me, you little ****? Ill have you know I graduated top of my class in the Navy Seals, and Ive been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills. I am trained in gorilla warfare and Im the top sniper in the entire US armed forces. You are nothing to me but just another target. I will wipe you the **** out with precision the likes of which has never been seen before on this Earth, mark my ****ing words. You think you can get away with saying that **** to me over the Internet? Think again, ****er. As we speak I am contacting my secret network of spies across the USA and your IP is being traced right now so you better prepare for the storm, maggot. The storm that wipes out the pathetic little thing you call your life. Youre ****ing dead, kid. I can be anywhere, anytime, and I can kill you in over seven hundred ways, and thats just with my bare hands. Not only am I extensively trained in unarmed combat, but I have access to the entire arsenal of the United States Marine Corps and I will use it to its full extent to wipe your miserable ass off the face of the continent, you little ****. If only you could have known what unholy retribution your little clever comment was about to bring down upon you, maybe you would have held your ****ing tongue. But you couldnt, you didnt, and now youre paying the price, you goddamn idiot. I will **** fury all over you and you will drown in it. Youre ****ing dead, kiddo.",
-        "Own a musket for home defense, since that's what the founding fathers intended. Four ruffians break into my house. \"What the devil?\" As I grab my powdered wig and Kentucky rifle. Blow a golf ball sized hole through the first man, he's dead on the spot. Draw my pistol on the second man, miss him entirely because it's smoothbore and nails the neighbors dog. I have to resort to the cannon mounted at the top of the stairs loaded with grape shot, \"Tally ho lads\" the grape shot shreds two men in the blast, the sound and extra shrapnel set off car alarms. Fix bayonet and charge the last terrified rapscallion. He Bleeds out waiting on the police to arrive since triangular bayonet wounds are impossible to stitch up. Just as the founding fathers intended.",
-        "Syntax error the platypus?? PERRY the syntax platypus??",
-        "Error Code 8008135",
-        "Something went wrong, and that means you're stupid.",
-        "Answer is locked behind the \"Complete Answers\" DLC for $3.99.",
-        "I made a severe and continuous lapse in my judgement, and I don’t expect to be forgiven. I’m simply here to apologize.",
-        "RAID: Shadow Legends is an immersive online experience with everything you'd expect from a brand new RPG title. It's got an amazing storyline, awesome 3D graphics, giant boss fights, PVP battles, and hundreds of never before seen champions to collect and customize.",
-        "ERROR: User's mother is too fat",
-        ]
-        return None, 0, random.choice(hallucinations)
+        return None, 0, load_ai_output()
         
     new_xp = 0
 
@@ -213,12 +260,22 @@ def calculate(full_equation, operators, level, dlc) -> tuple[float, int, str]:
             return None, new_xp, "You haven't unlocked that operator yet!"
         elif operator == "/" and level < 3:
             return None, new_xp, "You haven't unlocked that operator yet!"
-        elif (operator == '**' or operator == '%') and dlc == False:
-            return None, new_xp, "This operator is unlocked in DLC! Please purchase the \"Powers n' Remainders\" Expansion Pack for $4.99."
+
+
+    
+
+    if "sqrt" in operators or "**" in operators:
+        if not dlc:
+            return None, new_xp, "This operator is unlocked in DLC! Please purchase the \"Powers n' Roots\" Expansion Pack for $4.99."
+    
+    if "log" in operators or "ln" in operators or "%" in operators:
+        if not dlc:
+            return None, new_xp, "This operator is unlocked in DLC! Please purchase the \"Logs n' Remainders\" Expansion Pack for $4.99."
+        
 
 
     print("Working on it! In the meanwhile, check out a word from our sponsors!")
-    adverts()
+    load_internet_ad()
     for i in range(2):
         for i in ["*", "**", "**-", "**--", "**--+", "**--++", "**--++÷", "**--++÷÷"]:
             time.sleep(0.5)
@@ -228,32 +285,23 @@ def calculate(full_equation, operators, level, dlc) -> tuple[float, int, str]:
             # Clear the last line
             sys.stdout.write('\x1b[2K')
 
+
+    
+    try:
+        answer = eval(full_equation, {"__builtins__": None}, named_operations)
+    except ZeroDivisionError:
+        return None, 0, "Division by zero is not allowed."
+    except Exception:
+        return None, 0, "Invalid expression. Please check your syntax."
+    
     new_xp = len(operators) 
-        
-    return eval(full_equation), new_xp, ""
+
+    return answer, new_xp, ""
 
        
         
 
-def adverts() -> None:
-    advertisements = [
-        "https://www.mangle.ca/get_random_url.php?t=1777763674", #random website
-        "https://www.youtube.com/watch?v=dQw4w9WgXcQ", #rickroll
-        "https://www.ko-fi.com/calcify", #kofi
-        "https://beaverhacks.org", # beaverhacks
-        "https://en.wikipedia.org/wiki/Geriatrics", # wikipedia page for geriatrics
-        "https://raidshadowlegends.com/", #raid shadow legends
-        "https://www.apple.com/", #apple
-        "https://www.nvidia.com/en-us/", #nvidia
-        "https://developers.google.com/", #google
-        "https://www.markiiisys.com/", #mark 3
-        "https://www.trimble.com/en", #trimble
-        "https://www.c1.ai/", #c1
-        "https://en.wikipedia.org/wiki/Gerald_Ford", #gerald ford president
-        
-    ]
-    webbrowser.open(random.choice(advertisements), new=1) 
-    return
+
 
 
 def response(full_equation,answer,new_xp,xp,level, error_message) -> None:
@@ -262,13 +310,13 @@ def response(full_equation,answer,new_xp,xp,level, error_message) -> None:
     print_menu(xp, level)
     
     if error_message != "":
-        print(error_message)
+        print_typed(error_message)
     else:
-        print (f'The answer to {full_equation} is {answer}!')
-        print (f'You earned {new_xp} XP from that calculation!')
+        print_typed(f'The answer to {full_equation} is {answer}!')
+        print_typed(f'You earned {new_xp} XP from that calculation!')
         if xp >= 20:
-            print (f'Congratulations! You leveled up to level {level + 1}!')
-        print (f'You now have {xp} XP! Only {20-xp} XP until the next level!')
+            print_typed(f'Congratulations! You leveled up to level {level + 1}!')
+        print_typed(f'You now have {xp} XP! Only {20-xp} XP until the next level!')
     return
 
 
@@ -280,7 +328,8 @@ def main() -> None:
     dlc = False
 
     while True:
-        xp, level = print_menu(xp, level)
+        dlc = False
+        xp, level = print_menu(xp, level, dlc)
         
         full_equation, operators = take_input()
 
@@ -306,7 +355,8 @@ def main() -> None:
             print("a mysterious benifactor has gifted you the \"Powers n' Remainders\" Expansion Pack for $4.99! You can now use the ** & %.")
             dlc = True
             print("Please pay us anyway man we need it")
-            webbrowser.open("https://www.ko-fi.com/calcify", new=1)
+            # webbrowser.open("https://www.ko-fi.com/calcify", new=1)
+            load_internet_ad("Kofi")
             time.sleep(4)
         elif redo_menu == 4:
             print("Exiting... Your data has been saved.")
@@ -314,7 +364,8 @@ def main() -> None:
     
     save_user_data(username, xp, level)
     print("Goodbye! and please consider supporting us on Ko-Fi for updates and new features!")
-    webbrowser.open("https://www.ko-fi.com/calcify", new=1)
+    load_internet_ad("Kofi")
+    # webbrowser.open("https://www.ko-fi.com/calcify", new=1)
     
     return
 
@@ -322,15 +373,7 @@ def main() -> None:
 
 main()
 
-"""
 
-ADDITIONAL FEATURES: 
-
-STRETCH FEATURES:
-Ascii advertisements (MAYBE)
-AI customer support
-JRPG boss fight
-"""
 
 
 # CODE SCRAPYARD

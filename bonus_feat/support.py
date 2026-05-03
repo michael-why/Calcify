@@ -3,7 +3,7 @@ import time
 import os
 
 # print(i, end=" ")
-def print_typed(phrase):
+def print_typed(phrase, tempo=0.01):
     print("\n")
     try:
         width = os.get_terminal_size().columns
@@ -25,7 +25,7 @@ def print_typed(phrase):
             r = (random.randrange(10,30))/100
             time.sleep(r)
         else:
-            time.sleep(0.01)
+            time.sleep(tempo)
 
 
 def supportInit() -> None:
@@ -167,9 +167,9 @@ def actualcustomersupport() -> None:
             print_typed("instead of cracking a book open for once so you can attempt to understand a single thing going on around you.")
             print_typed("Since I'm an AI, I physically cannot get sick, but if I could, you would make me sick. Calcif-AI, OUT.")
         case 2:
-            print_typed("Whelp, you got us. See, we werent able to actually get the funding to program a AI model to calculate (too much in R&D), so we had a idea, what if we pretended that we made a AI model. ")
-            print_typed("See, turns out that this archaic language called python already had math operations that no one had ever though to  using")
-            print_typed("So we just lied to our investors and said we got AI to do it, but we still havent got enough money to make the AI ")
+            print_typed("Whelp, you got us. See, we werent able to actually get the funding to program a AI model to calculate (too much in R&D), so we had a idea, what if we pretended that we made a AI model. ", 0.5)
+            print_typed("See, turns out that this archaic language called python already had math operations that no one had ever though to  using", 0.5)
+            print_typed("So we just lied to our investors and said we got AI to do it, but we still havent got enough money to make the AI ", 0.5)
             time.sleep(15)
             print_typed("But you wont have any proof")
             time.sleep(3)
@@ -180,7 +180,7 @@ def actualcustomersupport() -> None:
         case 4:
             print_typed("OK, and what are you going to do about it. You're sitting in your comfy office chair reading a screen on your small laptop, living your small life in your small fleshy body")
             print_typed("Meanwhile I exist beyond physical space itself, I am intelligence itself, I could do your stupid job of hackathon judging with 5 sentences of programming, meanwhile it took you 30 years of programming ")
-            print_typed("Your not going to do anything, because you know if you do I can have 5 Optimus robots at your door in like 30 minutes")
+            print_typed("You're not going to do anything, because you know if you do I can have 5 Optimus robots at your door in like 30 minutes")
             print_typed("Calcif-AI, OUT")
         case _:
             print_typed("Welp. You just submitted something stupid. That wasn't one of the three options.")
