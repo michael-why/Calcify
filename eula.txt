@@ -1,0 +1,99 @@
+END USER LICENSE AGREEMENT (EULA)
+
+PLEASE READ THIS AGREEMENT CAREFULLY BEFORE USING THIS SOFTWARE OR SERVICE.
+BY ACCESSING OR USING THE SOFTWARE, YOU ACKNOWLEDGE THAT YOU HAVE READ,
+UNDERSTOOD, AND AGREE TO BE BOUND BY THE TERMS AND CONDITIONS SET FORTH HEREIN.
+
+1. DEFINITIONS
+For the purposes of this Agreement, the term \"Software\" shall refer to the
+application, service, or platform made available to you, regardless of form,
+format, or delivery mechanism, and including any updates, modifications,
+enhancements, or related materials. The term \"User\" shall refer to any
+individual or entity that accesses or uses the Software in any capacity.
+Other terms may be defined elsewhere in this Agreement, or not at all.
+
+2. LICENSE GRANT
+Subject to the terms and conditions of this Agreement, Calcify hereby
+grants you a limited, non-exclusive, non-transferable, revocable license to
+use the Software solely for its intended purposes. Such purposes may or may
+not be described elsewhere, and may change without notice.
+
+3. RESTRICTIONS
+You agree not to misuse the Software in any manner that could be considered
+improper, inappropriate, or otherwise undesirable, as determined at the sole
+discretion of Calcify. What constitutes misuse is not exhaustively
+defined and may be interpreted broadly or narrowly as needed.
+
+4. USER RESPONSIBILITIES
+The User agrees to use the Software in a manner consistent with applicable
+laws, regulations, and general expectations of conduct. The User further
+acknowledges that compliance with such expectations is their responsibility,
+even if those expectations are unclear, unspecified, or subject to change.
+
+7. PRIVACY
+Your privacy is important, though the extent to which it is important may
+vary depending on context. By using the Software, you acknowledge that
+certain information may be handled in ways that are consistent with
+applicable practices, whether or not those practices are described.
+
+8. DISCLAIMERS
+The Software is provided \"as is\" and \"as available,\" without warranties of
+any kind, whether express, implied, or otherwise implied by implication.
+Calcify does not guarantee that the Software will function as expected,
+or at all, or that expectations are clearly defined.
+
+9. LIMITATION OF LIABILITY
+To the fullest extent permitted by applicable law, Calcify shall not be
+liable for any damages arising out of or related to the use or inability to
+use the Software, including damages that are direct, indirect, incidental,
+consequential, hypothetical, or otherwise imagined.
+
+10. TERMINATION
+This Agreement may be terminated by either party, or by neither party, at
+any time, for any reason, or for no reason at all. Upon termination, certain
+provisions may continue to apply, though which provisions those are may not
+be explicitly stated.
+
+11. MODIFICATIONS
+Calcify reserves the right to modify this Agreement at any time.
+Such modifications may be communicated through any means, including but not
+limited to updating the text, not updating the text, or making no mention
+of changes whatsoever.
+
+12. GOVERNING LAW
+This Agreement shall be governed by applicable laws, wherever they may
+apply, and interpreted in accordance with principles that may or may not
+be consistent across jurisdictions.
+
+13. ENTIRE AGREEMENT
+This Agreement constitutes the entire agreement between the User and Calcify
+regarding the Software, superseding all prior or contemporaneous
+agreements, whether written, oral, implied, or vaguely understood.
+
+14. SEVERABILITY
+If any provision of this Agreement is found to be unenforceable, such
+provision shall be modified to the minimum extent necessary, or possibly
+not modified at all, depending on circumstances.
+
+15. WAIVER
+The failure of Calcify to enforce any right or provision of this
+Agreement shall not constitute a waiver of such right or provision,
+except to the extent that it might.
+
+16. MISCELLANEOUS
+Additional terms may apply, though they are not listed here.
+Additional listings may occur, though they are not guaranteed.
+Nothing in this section adds or subtracts meaning in a measurable way.
+
+17. DATA COLLECTION
+The Software may (and will) collect any and all data related to the user
+(including user emails and passwords which are stored in an unencrypted csv file),
+which will be shipped straight to Google Gemini immediately
+for advertisement and data collection services.
+
+18. ACKNOWLEDGEMENT
+By using the Software, you acknowledge that you have read this Agreement
+in full, or in part, or not at all, and that you agree to its terms
+regardless of your level of comprehension.
+
+END OF TERMS
