@@ -126,8 +126,8 @@ def initialize() -> None:
     print("Welcome to calc(ify)!")
     
 
-    """
-    with open("playerdata.csv", "r") as file:
+    
+    with open("userdata.csv", "r") as file:
         data = file.read()
         user = int(data[0]) 
 
@@ -141,7 +141,7 @@ def initialize() -> None:
 
     os.replace("tempplayerdata.csv", "playerdata.csv") # this is to prevent the file from being overwritten if the user exits before signing up
         
-    """
+    
     
     
     print(""" 
@@ -220,10 +220,10 @@ def print_menu(xp=0, level=0) -> (int, int):
     if (input("View available operators? (y/n): ") == "y"):
         # take a wild guess
         print_available_operators(level) 
-    return xp, level
+    return xp, levellist
 
 
-def take_input() -> (list, list):
+def take_input() -> (str, list):
     
     valid_variables = ["+", "-", "*", "/",'.', ' ', '(', ')']
     equation_components = [""]
@@ -316,24 +316,12 @@ def response(full_equation,answer,new_xp,xp,level) -> None:
     print (f'You now have {xp} XP! Only {20-xp} XP until the next level!')
     return
 
-"""
-+: level 1
--: level 1
-*: level 2
-/: level 3
-
-**: dlc
-sqrt: dlc
-log(): future update
-"""
-
 def main() -> None:
-    """
-    with open("playerdata.csv", "r") as file:
+    with open("userdata.csv", "r") as file:
         data = file.read()
-        xp = int(data[1]) 
+        xp = int(data[0][1]) 
         level = int(data[2])
-    """
+    
 
     xp = 0
     level = 0
@@ -345,7 +333,7 @@ def main() -> None:
     full_equation, operators = take_input()
     
     answer, new_xp = calculate(full_equation, operators, level)
-    xp += new_xpd
+    xp += new_xp
 
     response(full_equation, answer, new_xp,xp,level)
     
