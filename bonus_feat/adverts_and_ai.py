@@ -20,7 +20,8 @@ def load_internet_ad(brand='') -> None:
         "https://www.markiiisys.com/", #mark 3
         "https://www.trimble.com/en", #trimble
         "https://www.c1.ai/", #c1
-        "https://en.wikipedia.org/wiki/Gerald_Ford", #gerald ford presiden  
+        "https://en.wikipedia.org/wiki/Gerald_Ford", #gerald ford president
+        "https://us.dollarshaveclub.com/", #dollar shave club  
     ]
 
     if brand == "Kofi":

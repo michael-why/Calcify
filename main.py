@@ -36,17 +36,17 @@ def initialize() -> None:
     print("Welcome to calc(ify): the AI-powered calculator of tomorrow.")
 
     print("""                                                                          
-                                               ×   ÷÷                       ×       
-                         =÷=                ×××π  ÷××÷     ××××××           ××≈     
-                         =÷=              √××             ××                 ××π    
-      ≈≈≈≈≈     ∞∞∞∞∞    =÷=    ≈≈≈≈≈    ÷××    ××××    ×××××××× ××     ××    ××    
-    ≈≈≈    ≈≈  √     ∞∞  =÷=  ≈≈∞   ≈≈≈  ××       ××      ××     ××    ××     ××    
-    ≈≈          ∞∞∞∞∞∞∞  =÷= ≈≈π         ××       ××     ××÷      ××  ××      ××    
-    ≈≈        ∞∞√    ∞∞  =÷= ≈≈≈         ××      ××      ××       ×× ××      ××≠    
-     ≈≈   ≈≈≈ √∞∞   ∞∞∞  =÷=  ≈≈≈   ≈≈∞  ××      ××      ××       ××××      ×××     
-       ≈≈≈≈     ∞∞∞√ ∞∞  =÷=    √≈≈≈      ××      ×××   √××        ××     ×××       
-                                           ××=          ××       ∞××    ×××         
-                                                     ××××      ×××                  
+                                               ×   ÷÷                       ×
+                        =÷=                ×××π  ÷××÷     ××××××           ××≈
+                        =÷=              √××             ××                 ××π
+     ≈≈≈≈≈     ∞∞∞∞∞    =÷=    ≈≈≈≈≈    ÷××    ××××    ×××××××× ××     ××    ××
+   ≈≈≈    ≈≈  √     ∞∞  =÷=  ≈≈∞   ≈≈≈  ××       ××      ××     ××    ××     ××
+   ≈≈          ∞∞∞∞∞∞∞  =÷= ≈≈π         ××       ××     ××÷      ××  ××      ××
+   ≈≈        ∞∞√    ∞∞  =÷= ≈≈≈         ××      ××      ××       ×× ××      ××≠
+    ≈≈   ≈≈≈ √∞∞   ∞∞∞  =÷=  ≈≈≈   ≈≈∞  ××      ××      ××       ××××      ×××
+      ≈≈≈≈     ∞∞∞√ ∞∞  =÷=    √≈≈≈      ××      ×××   √××        ××     ×××
+                                          ××=          ××       ∞××    ×××
+                                                   ××××      ×××
     """)
     print("Bringing AI to calculation, since yesterday.")
     print("(WARNING: This program is in early development and the AI model (Calcif-AI) tends to hallucinate. Read EULA for more details.)")
@@ -159,11 +159,11 @@ def print_menu(xp=0, level=0, dlc=False) -> tuple[int, int]:
     print_typed("[+]  Addition: The trusty, rusty, dusty, original operator.")
     print_typed("[-]  Subtraction: Addition's WAAACCCKY cousin!!")
 
-    if (level > 2):
+    if (level >= 2):
         print_typed("[*]  Multiplication: A super-beefed up version of addition.Unlocked at Level 2.")
     else:
         print_typed("[*]  LOCKED: Unlocked at Level 2")
-    if (level > 3):
+    if (level >= 3):
         print_typed("[/]  Division: NASTY. I've never seen anything like this before! While Multiplication uses his powers for good, Division uses his powers for EVIL. Unlocked at Level 3")
     else:
         print_typed("[/]  LOCKED: Unlocked at Level 3.")
@@ -177,7 +177,7 @@ def print_menu(xp=0, level=0, dlc=False) -> tuple[int, int]:
         print("\n")
     else:
         print_typed("[**]   Exponetiation: Imagine multiplication, but EXTREME")
-        print_typed("[sqrt]   Square Root: A literal supervillian, cutting everything it sees in half ")
+        print_typed("[sqrt]   Square Root: A literal supervillian, square-rooting everything it sees.")
         print_typed("[log]   Logarithm: The reverse of exponentiation — finds the power that made the number.")
         print_typed("[%]   Modulo(Remainder): What’s left over after division, like the last cookie slice.")
         print("\n")
@@ -347,10 +347,10 @@ def main() -> None:
 
         redo_menu = int(input(
             """What would you like to do next?\n
-            [1]: Do another calculation\n
-            [2]: Contact customer support\n
-            [3]: Purchase DLC\n
-            [4]: Exit\n
+[1]: Do another calculation\n
+[2]: Contact customer support\n
+[3]: Purchase DLC\n
+[4]: Exit\n
             """))
 
         if redo_menu == 1:
