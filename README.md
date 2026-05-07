@@ -1,5 +1,7 @@
 # Calc(ify)
 
+** submission to the BEAVERHACKS HACKATHON **
+
 Have you ever been stuck in the sticky position of needing to solve math equations, but found yourself getting stuck? Have you ever wished the process of math could be simply automated using today’s machinery? Well wish no longer!
 
 Welcome to Calc(ify). It is the solution to computations, the AI-fueled powerhouse built to last.
@@ -24,7 +26,7 @@ We, [Michael Yohannes](https://github.com/michael-why) and [Jason Jeremy Miller(
 
 ## 🚀 Usage instructions
 
-To run this program, please just download this entire repository and run the file 
+To run this program, just download this entire repository and run the file 
 **'main.py'**:
 
 ## Final Note> 
