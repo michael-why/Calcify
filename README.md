@@ -1,6 +1,6 @@
 # Calc(ify)
 
-** submission to the BEAVERHACKS HACKATHON **
+**submission to the BEAVERHACKS HACKATHON**
 
 Have you ever been stuck in the sticky position of needing to solve math equations, but found yourself getting stuck? Have you ever wished the process of math could be simply automated using today’s machinery? Well wish no longer!
 
@@ -20,7 +20,7 @@ Here are the main features of Calc(ify):
  We implemented a proprietary neural network, something we call Calcif-AI to complete mathematics equations like no one has ever done before. Before, we had human computers, now, with Calcify, we have computer computers. 
  The program will comprehend a user inputted equation, use a advanced propietary AI model to calculate the answer (running locally), then provides them a answer. All of this is coexisting with a complex leveling and progression system that keeps users engaged longterm
 
-### ✍️ Author
+## ✍️ Authors
 
 We, [Michael Yohannes](https://github.com/michael-why) and [Jason Jeremy Miller(or as we call him Jsquared)](https://github.com/jasonmthe2st-oss), are the two only members of the Calc(ify) team.
 
@@ -29,5 +29,5 @@ We, [Michael Yohannes](https://github.com/michael-why) and [Jason Jeremy Miller(
 To run this program, just download this entire repository and run the file 
 **'main.py'**:
 
-## Final Note> 
+## Final Note
 *note that no actual AI is used in this program*
